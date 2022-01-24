@@ -15,10 +15,10 @@ using namespace std;
 */
 class Car // Base class
 {
-protected: // protected member data; only derived classes (Truck) can access
-    int speed;
-    char direction; // {'n','s','e','w'}
-    vector<float> location; // {lat, long}
+private: // could use 'protected' to give derived classes (Truck) access
+    int currentSpeed;
+    char currentDirection; // {'n','s','e','w'}
+    vector<float> currentLocation; // {lat, long}
 public: // public methods
     void Accelerate(int toSpeed) { cout << "calling Car::Accelerate" << endl;};
     void Decelerate(int toSpeed) {};
