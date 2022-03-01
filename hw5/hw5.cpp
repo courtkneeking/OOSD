@@ -115,31 +115,31 @@ namespace HW5_2021_OOP
     class ISimOutput  
     {
     public:
-        virtual double GetSpeed(Vehicle v)=0;
+        virtual double GetSpeed(Vehicle &v)=0;
     };
     class ISimInput 
     {
     public:
-        virtual void SetSpeedLimit(Vehicle v, double speed)=0;
+        virtual void SetSpeedLimit(Vehicle &v, double speed)=0;
     };
     // GUI implements interfaces, but is an abstract class 
     // must contain interface functions, but they're still virtual
     class GUI : public ISimInput, public ISimOutput
     {
     public:
-        virtual double GetSpeed(Vehicle v)=0;
-        virtual void SetSpeedLimit(Vehicle v, double speed)=0;
+        virtual double GetSpeed(Vehicle &v)=0;
+        virtual void SetSpeedLimit(Vehicle &v, double speed)=0;
     };
     // ImperialGUI, MetricGUI, is-a GUI inheritance 
     // finally define the functions, use keyword override (or final?)
     class ImperialGUI: public GUI
     {
     public:
-        double GetSpeed(Vehicle v) override
+        double GetSpeed(Vehicle &v) override
         {
             return v.GetCurrentSpeed()*Constants::MpsToMph; 
         };
-        void SetSpeedLimit(Vehicle v, double s) override 
+        void SetSpeedLimit(Vehicle &v, double s) override 
         { 
             v.SetDesiredSpeed( s/Constants::MpsToMph );
         };
@@ -147,11 +147,11 @@ namespace HW5_2021_OOP
     class MetricGUI: public GUI
     {
     public:
-        double GetSpeed(Vehicle v) override
+        double GetSpeed(Vehicle &v) override
         {
             return v.GetCurrentSpeed()*Constants::MpsToKph; 
         };
-        void SetSpeedLimit(Vehicle v, double s) override
+        void SetSpeedLimit(Vehicle &v, double s) override
         { 
             v.SetDesiredSpeed(s/Constants::MpsToKph);
         };
@@ -177,11 +177,18 @@ namespace HW5_2021_OOP
             // set the speed limit for the three cars 
             // based on the speedLimit input and interface unit
             Car* car =  new Car(); 
-            car->SetDesiredSpeed(speedLimit);
             Truck* truck1 = new Truck(4);  // random load weight 
-            truck1->SetDesiredSpeed(speedLimit);
             Truck* truck2 = new Truck(8); 
-            truck2->SetDesiredSpeed(speedLimit);
+
+            // car->SetDesiredSpeed(speedLimit);
+            // truck1->SetDesiredSpeed(speedLimit);
+            // truck2->SetDesiredSpeed(speedLimit);
+
+            gui->SetSpeedLimit(*car,speedLimit);
+            gui->SetSpeedLimit(*truck1,speedLimit);
+            gui->SetSpeedLimit(*truck2,speedLimit);
+
+
 
             std::list<Vehicle*> vehicles;
 
