@@ -288,22 +288,6 @@ bool JsonMapLoad::GetString(std::string * str, std::istream& stream){
     }
     return false;
 };
-// bool JsonMapLoad::GetString(std::string * str, std::istream& stream){
-//     char x;
-//     std::string temp;
-//     stream >> x;
-//     if (x != '"') return false; // first must have opening quotes, throw away
-//     while(stream){
-//         stream>>x;
-//         if(x=='"') break;
-//         else temp+=x; //save chars to temp string
-//     }
-//     *str = temp; //save temp string into reference parameter
-//     // return true if it's an identifier we are interested in
-//     if (temp=="Name" ||  temp=="Length" ||  temp=="XLocation"||  temp=="YLocation"||  temp=="Heading")
-//         return true;
-//     else return false;
-// };
 
 // load the map into memory from json map (stream)
 // and save into the road parameter object

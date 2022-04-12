@@ -26,7 +26,7 @@ class JsonMapSave;
 
 // Shared.h
 enum Heading { 
-    North, East, South, West 
+    North, South, East, West 
 }; // clockwise 0-3
 
 class Container{ // instead of Object
